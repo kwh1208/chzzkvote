@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<header class="nav-bar">
+    <h1>치지직 투표</h1>
+</header>
+<div class="form-box">
+    <p><strong>스트리머 선택하기</strong></p>
+    <div class="search-box">
+        <input type="search" class="search">
+        <img src="/img/search.png" class="icon">
+    </div>
+    <div class="streamers">
+        <form action="/vote" method="post">
+            <div class="streamer-box">
+                <th:block th:each="streamer:${streamers}">
+                    <input type="radio" class="radio" th:id="${streamer}" name="streamer" th:value="${streamer}" th:data-content="${streamer}">
+                    <label th:for="${streamer}" class="radio-label" th:text="${streamer}"></label><br>
+                </th:block>
+            </div>
+            <button type="submit">확인</button>
+        </form>
+    </div>
+    <div class="error">
+        <div class="non-list" onclick="nonList()">
+            <p>스트리머 목록에 없는 경우</p>
+        </div>
+        <div class="cookie" onclick="cookieError()">
+            <p>쿠키에러 발생시 해결방법</p>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function nonList() {
+        let url = "/nonlist";
+        let name = "popup test";
+        let option = "width = 500, height = 500, top = 100, left = 200, location = no"
+        window.open(url, name, option);
+    }
+
+    function cookieError() {
+        let url = "/cookie";
+        let name = "popup test";
+        let option = "width = 500, height = 500, top = 100, left = 200, location = no"
+        window.open(url, name, option);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.querySelector('.search');
+        const radioLabels = document.querySelectorAll('.radio-label');
+
+        searchInput.addEventListener('input', function() {
+            const searchText = this.value; // 입력한 텍스트를 그대로 사용
+
+            radioLabels.forEach(function(label) {
+                const labelContent = label.textContent; // 라벨의 텍스트를 그대로 사용
+
+                // 입력한 텍스트가 라벨의 텍스트에 포함되면 보이게 설정
+                if (labelContent.includes(searchText)) {
+                    label.style.display = 'flex';
+                } else {
+                    label.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+</html>

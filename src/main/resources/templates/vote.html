@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket 채팅 예제</title>
+    <link rel="stylesheet" href="/css/vote.css">
+</head>
+<body>
+    <header class="nav-bar">
+        <h1>치지직 투표</h1>
+    </header>
+    <main>
+        <div class="user">
+            <div id="totalVote">
+                <p id="num">0</p>
+            </div>
+            <div id="vote">
+                <div id="voteNick">
+                    <!--투표한 사람들 닉네임-->
+                </div>
+            </div>
+            <div id="drawButton" onclick="draw()">
+                <p>추첨</p>
+            </div>
+        </div>
+        <div class="main">
+            <div class="main-header">
+                <img src="/img/house.png" onclick="goHome()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64">
+                    <path fill="none" d="M0 0h24v24H0z"/>
+                    <path fill="#c5c5c7" d="M10 17l5-5-5-5v10z"/>
+                </svg>
+                <p id="selected"></p>
+            </div>
+            <div class="select-vote-draw">
+                <div class="select-draw" onclick="selectDraw()">
+                    간편 추첨
+                </div>
+                <div class="select-vote" onclick="selectVote()">
+                    숫자 투표
+                </div>
+                <div class="explanation">
+                    <p><strong>간편 추첨</strong></p>
+                    <span>채팅에 참여하는 모든 시청자를 대상으로 추첨합니다.</span>
+                    <p><strong>숫자 투표</strong></p>
+                    <span>채팅을 통해 투표를 진행합니다.</span>
+                    <br>
+                    <span>특정 선택지를 고른 시청자들을 대상으로 추첨할 수 있습니다.</span>
+                    <span>시청자 참여방법 채팅장에 <strong>!투표 (숫자)</strong></span>
+                    <br><br><br>
+                    <span>※ 치지직 채팅 서버는 동시에 받아들일 수 있는 채팅의 숫자가 한정되어 있기 때문에,</span>
+                    <span>수백명 이상의 시청자가 동시에 참여하는 경우 일시적으로 채팅창이 폭주하여 일부
+                    채팅이 누락될 수 있습니다.</span>
+                </div>
+            </div>
+            <div class="draw">
+                <div class="button-box">
+                    <div class="start" onclick="startDraw()">
+                        <p>시작</p>
+                    </div>
+                    <div class="end" onclick="stopDraw()">
+                        <p>마감</p>
+                    </div>
+                </div>
+                <p class="draw-explanation">채팅창에 아무말이나 입력하면 참여할 수 있습니다.</p>
+            </div>
+            <div class="vote">
+                <div class="button-box">
+                    <div class="start" onclick="startVote()">
+                        <p>시작</p>
+                    </div>
+                    <div class="end" onclick="stopVote()">
+                        <p>마감</p>
+                    </div>
+                </div>
+                <div id="show-num">
+                    <p>득표 현황 보이기/숨기기 &nbsp;&nbsp;</p>
+                    <label class="switch">
+                        <input type="checkbox" onchange="toggleSwitch()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <input type="text" class="selection">
+                <div class="voting">
+                </div>
+                <div class="button-box" id="selection">
+                    <div class="add-selection" onclick="addSelection()">선택지 추가하기</div>
+                    <div class="delete-selection" onclick="deleteSelection()">선택지 삭제하기</div>
+                </div>
+                <p class="vote-explanation">최대 10개 선택지를 추가할 수 있습니다.</p>
+            </div>
+        </div>
+        <div id="iframeContainer" th:unless="${adult}">
+            <iframe th:src="'https://chzzk.naver.com/live/' + ${uid} + '/chat'"></iframe>
+        </div>
+        <div id="iframeContainer_adult" th:if="${adult}">
+            <h4 th:text="${adult}"></h4>
+        </div>
+    </main>
+    <div id="winner-container">
+        <div class="winner">
+            <div style="background-color: #c5c5c7; width: 100%;display: flex; justify-content: center; padding-bottom: 10px; padding-top: 10px">
+                <p id="winner-nick"></p>
+            </div>
+            <div id="winner-chat">
+            </div>
+            <button onclick="closeModal()" class="close-modal">확인</button>
+        </div>
+    </div>
+<script th:inline="javascript">
+    let cid = [[${cid}]];
+    let tkn = [[${tkn}]];
+    let sendMessage = '{"ver":"2","cmd":100,"svcid":"game","cid":"'+cid+'","bdy":{"uid":null,"devType":2001,"accTkn":"'+tkn+'","auth":"READ"},"tid":1}';
+    let socket = new WebSocket('wss://kr-ss3.chat.naver.com/chat');
+</script>
+    <script src="/js/vote.js"></script>
+</body>
+</html>

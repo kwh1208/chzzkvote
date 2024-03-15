@@ -47,6 +47,7 @@ public class ChkController {
         boolean adult = (boolean)result.get("adult");
         String cid = (String) result.get("chatChannelId");
         String accessToken = getAccessToken(cid);
+        model.addAttribute("streamer", streamer);
         model.addAttribute("tkn", accessToken);
         model.addAttribute("cid", cid);
         model.addAttribute("uid", UIDStorage.get(streamer));

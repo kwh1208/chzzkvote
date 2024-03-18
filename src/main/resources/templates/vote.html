@@ -54,6 +54,7 @@
                     채팅이 누락될 수 있습니다.</span>
                 </div>
             </div>
+
             <div class="draw">
                 <div class="button-box">
                     <div class="start" onclick="startDraw()">
@@ -65,6 +66,7 @@
                 </div>
                 <p class="draw-explanation">채팅창에 아무말이나 입력하면 참여할 수 있습니다.</p>
             </div>
+
             <div class="vote">
                 <div class="button-box">
                     <div class="start" onclick="startVote()">
@@ -74,21 +76,42 @@
                         <p>마감</p>
                     </div>
                 </div>
-                <div id="show-num">
-                    <p>득표 현황 보이기/숨기기 &nbsp;&nbsp;</p>
-                    <label class="switch">
-                        <input type="checkbox" onchange="toggleSwitch()">
-                        <span class="slider"></span>
-                    </label>
+                <div class="showNumAndTime">
+                    <div id="show-num">
+                        <p>득표 현황 보이기/숨기기 &nbsp;&nbsp;</p>
+                        <label class="switch">
+                            <input type="checkbox" onchange="toggleSwitch()">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="peopleAndTime">
+                        <div class="people">
+                            <span>인원수 기준 마감</span>
+                            <input id="peopleInput" type="text" >
+                        </div>
+                        <div class="time">
+                            <span>시간 기준 마감</span>
+                            <input id="timeInput" type="text" placeholder="MM:SS">
+                        </div>
+                        <div class="people_start">
+                            <span>마감 인원수</span>
+                            <div id="targetPeople"></div>
+                        </div>
+                        <div class="time_start">
+                            <span>남은 시간</span>
+                            <div id="stopWatch"></div>
+                        </div>
+                    </div>
                 </div>
                 <input type="text" class="selection">
+
                 <div class="voting">
                 </div>
                 <div class="button-box" id="selection">
                     <div class="add-selection" onclick="addSelection()">선택지 추가하기</div>
                     <div class="delete-selection" onclick="deleteSelection()">선택지 삭제하기</div>
                 </div>
-                <p class="vote-explanation">최대 10개 선택지를 추가할 수 있습니다.</p>
+                <p class="vote-explanation">최대 10개 선택지를 추가할 수 있습니다.<br><br>시간 기준 마감은 MM:SS 형식을 지켜서 입력해주세요.<br> 예시) 3분 30초뒤 마감인 경우 03:30</p>
             </div>
         </div>
         <div id="iframeContainer" th:unless="${adult}">

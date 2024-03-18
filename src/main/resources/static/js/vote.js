@@ -8,6 +8,10 @@ let voteBoolean = false;
 let drawBoolean = false;
 const startButtons = document.querySelectorAll('.start');
 const stopButtons = document.querySelectorAll('.end');
+let people = false;
+let time = false;
+let peopleValue = '';
+let timeValue = '';
 
 function selectDraw() {
     document.getElementsByClassName("select-vote-draw")[0].style.display = "none";
@@ -181,6 +185,45 @@ function startVote() {
         selections[i].style.display = 'none';
     }
 
+    let peopleInput = document.getElementById('peopleInput');
+    let timeInput = document.getElementById('timeInput');
+
+    document.getElementsByClassName('people')[0].style.display = 'none';
+    document.getElementsByClassName('time')[0].style.display = 'none';
+
+    if (peopleInput.value !== ""){
+        people = true;
+        peopleValue = parseInt(peopleInput.value);
+        document.getElementById('targetPeople').innerText = peopleValue;
+        document.getElementsByClassName('people_start')[0].style.display = 'flex';
+    }
+    if (timeInput.value !== ""){
+        time = true;
+        let timeArray = timeInput.value.split(":");
+        timeValue = parseInt(timeArray[0]) * 60 + parseInt(timeArray[1]);
+        document.getElementById('stopWatch').innerText = timeInput.value;
+        document.getElementsByClassName('time_start')[0].style.display = 'flex';
+        stopWatch(timeValue);
+    }
+}
+
+function displayTime(targetTime) {
+    let min = Math.floor(targetTime / 60);
+    let sec = targetTime%60;
+    document.getElementById('stopWatch').innerHTML =
+        (min < 10 ? "0" + min : min) + ":" +
+        (sec < 10 ? "0" + sec : sec);
+}
+
+function stopWatch(targetTime) {
+    let timer = setInterval(function () {
+        targetTime--; // 목표 시간 감소
+        displayTime(targetTime); // 시간 표시 업데이트
+        if (targetTime <= 0) {
+            clearInterval(timer); // 타이머 중지
+            stopVote();
+        }
+    }, 1000);
 }
 
 function startDraw() {
@@ -235,7 +278,11 @@ function voteStart(message) {
                 bar[number-1].style.width = Math.floor((voteUser[number-1].size / chatUser.size) * 100)+"%";
             }
         }
-    }}
+    }
+    if (people===true&&peopleValue<=chatUser.size){
+        stopVote();
+    }
+}
 
 function drawStart(message) {
     console.log("drawStart")

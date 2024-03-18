@@ -191,7 +191,7 @@ input{
 }
 .voting{
     display: none;
-    margin-top: 100px
+    margin-top: 130px
 }
 .switch {
     position: relative;
@@ -250,7 +250,32 @@ input:checked + .slider:before {
     flex-direction: row;
     align-items: center;
     float: right;
+}
+.showNumAndTime{
+    display: flex;
+    align-items: center;
+    float: right;
     margin-right: 10%;
+    flex-direction: column;
+    margin-bottom: 1vh;
+}
+.people{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.people_start{
+    align-items: center;
+    display: none;
+    flex-direction: column;
+}
+.time_start{
+    align-items: center;
+    display: none;
+    flex-direction: column;
+}
+.time input{
+    text-align: center;
 }
 .voting-selection-info{
     display: flex;
@@ -370,4 +395,16 @@ input:checked + .slider:before {
 }
 .total-vote{
     float: right;
+}
+.peopleAndTime{
+    display: flex;
+    margin-top: 1vh;
+}
+.peopleAndTime span{
+    font-weight: bolder;
+}
+.time{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }

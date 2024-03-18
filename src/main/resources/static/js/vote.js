@@ -65,6 +65,10 @@ function goHome() {
     reload();
     document.getElementById("voteNick").innerHTML ='';
     document.getElementById("num").innerText = '0';
+    document.getElementsByClassName('people')[0].style.display = 'flex';
+    document.getElementsByClassName('time')[0].style.display = 'flex';
+    document.getElementsByClassName('people_start')[0].style.display = 'none';
+    document.getElementsByClassName('time_start')[0].style.display = 'none';
 }
 
 function reload() {
@@ -76,8 +80,17 @@ function reload() {
     total = 0;
     voteBoolean = false;
     drawBoolean = false;
+    people = false;
+    time = false;
+    peopleValue = '';
+    timeValue = '';
+    document.getElementById('peopleInput').value = '';
+    document.getElementById('timeInput').value = '';
+
     //vote 부분
     let selectionInputs = document.querySelectorAll('.selection');
+
+
 
     if (selectionInputs.length > 1) {
         for (let i = 0; i < selectionInputs.length - 1; i++) {
@@ -89,12 +102,14 @@ function reload() {
 
     let voting = document.getElementsByClassName('voting')[0];
 
+    document.getElementsByClassName('selection')[0].style.display = 'flex';
+    document.getElementById('selection').style.display = 'flex';
+
     while (voting.firstChild) {
         voting.removeChild(voting.firstChild);
     }
 
     voting.style.display = 'none';
-    document.getElementById('selection').style.display = 'flex';
 
 }
 

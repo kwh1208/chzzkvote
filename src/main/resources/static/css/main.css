@@ -20,22 +20,23 @@ body {
     padding: 0;
 }
 input[type="radio"] {
-    display: none; 
+    display: none; /* 입력 요소 숨기기 */
 }
 
 .radio-label {
-    display: flex; 
-    justify-content: center; 
+    display: flex; /* 텍스트를 가운데 정렬하기 위해 flexbox 사용 */
+    justify-content: center; /* 수평 가운데 정렬 */
     align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 5px; 
-    cursor: pointer;
+    border: 1px solid #ccc; /* 라벨에 테두리 추가 */
+    border-radius: 5px; /* 라벨의 모서리를 둥글게 설정 */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경하여 클릭 가능하도록 함 */
     margin-left: 40px;
     width: 150px;
     height: 50px;
     margin-top: 30px;
 }
 
+/* 라디오 버튼 선택 시 라벨에 다른 스타일 적용 */
 input[type="radio"]:checked + .radio-label {
     background-color: #f0f0f0;
     border-color: #000;
@@ -60,8 +61,8 @@ input[type="radio"]:checked + .radio-label {
 }
 .streamers{
     display: flex;
-    justify-content: center; 
-    align-items: center;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
     flex-direction: column;
 }
 .search:focus {

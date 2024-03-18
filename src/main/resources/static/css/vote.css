@@ -102,7 +102,7 @@ main{
     text-align: center;
 }
 .select-draw, .select-vote {
-    border: black 1px solid;
+    border: black 4px solid;
     height: 6vh;
     text-align: center;
     display: flex;
@@ -113,6 +113,14 @@ main{
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
+    font-size: x-large;
+    font-weight: bolder;
+}
+.selection{
+    font-weight: bolder;
+    padding-left: 5px;
+    font-size: x-large;
+    height: 5vh;
 }
 .select-vote-draw{
     display: block;
@@ -275,6 +283,9 @@ input:checked + .slider:before {
     flex-direction: column;
 }
 .time input{
+    text-align: center;
+}
+.people input{
     text-align: center;
 }
 .voting-selection-info{

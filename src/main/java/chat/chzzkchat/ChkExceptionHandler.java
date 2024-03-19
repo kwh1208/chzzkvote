@@ -14,6 +14,6 @@ public class ChkExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public String Error(){
-        return "error";
+        return "Error";
     }
 }

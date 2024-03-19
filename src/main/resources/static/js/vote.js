@@ -58,59 +58,7 @@ function toggleSwitch() {
 }
 
 function goHome() {
-    document.getElementsByClassName("select-vote-draw")[0].style.display = "block";
-    document.getElementsByClassName("vote")[0].style.display = "none";
-    document.getElementsByClassName("draw")[0].style.display = "none";
-    document.getElementById("selected").innerText = "";
-    reload();
-    document.getElementById("voteNick").innerHTML ='';
-    document.getElementById("num").innerText = '0';
-    document.getElementsByClassName('people')[0].style.display = 'flex';
-    document.getElementsByClassName('time')[0].style.display = 'flex';
-    document.getElementsByClassName('people_start')[0].style.display = 'none';
-    document.getElementsByClassName('time_start')[0].style.display = 'none';
-}
-
-function reload() {
-    chatUser = new Set();
-    voteUser = [];
-    voteUser.push(new Set());
-    num = [];
-    num[0] = 0;
-    total = 0;
-    voteBoolean = false;
-    drawBoolean = false;
-    people = false;
-    time = false;
-    peopleValue = '';
-    timeValue = '';
-    document.getElementById('peopleInput').value = '';
-    document.getElementById('timeInput').value = '';
-
-    //vote 부분
-    let selectionInputs = document.querySelectorAll('.selection');
-
-
-
-    if (selectionInputs.length > 1) {
-        for (let i = 0; i < selectionInputs.length - 1; i++) {
-            selectionInputs[i].remove();
-        }
-        selectionInputs[selectionInputs.length - 1].value = '';
-        selectionInputs[selectionInputs.length - 1].style.display = 'block';
-    }
-
-    let voting = document.getElementsByClassName('voting')[0];
-
-    document.getElementsByClassName('selection')[0].style.display = 'flex';
-    document.getElementById('selection').style.display = 'flex';
-
-    while (voting.firstChild) {
-        voting.removeChild(voting.firstChild);
-    }
-
-    voting.style.display = 'none';
-
+    location.reload();
 }
 
 socket.onopen=function (){
